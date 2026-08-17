@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import heroToothVideo from './assets/videos/hero_tooth_video.mp4';
 import heroToothImg from './assets/images/hero_tooth_render_1786930380496.jpg';
-import aboutDentistImg from './assets/images/about_dentist_photo_1786930392734.jpg';
+import draMayumePortrait from './assets/images/dra_mayume_portrait_1786942310156.jpg';
+import LogoM from './components/LogoM.tsx';
+import { getRealTimeBusinessStatus, BusinessStatus } from './utils/businessHours.ts';
 import {
   IconLimpeza,
   IconClareamento,
@@ -10,7 +12,6 @@ import {
   IconImplante,
   IconEstetica,
 } from './components/DentalServiceIcons.tsx';
-import RealtimeStatusBadge from './components/RealtimeStatusBadge.tsx';
 
 const servicesData = [
   { id: 'service-limpeza', title: 'Limpeza', desc: 'Profilaxia e remoção de tártaro', icon: <IconLimpeza /> },
@@ -23,6 +24,7 @@ const servicesData = [
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [businessStatus, setBusinessStatus] = useState<BusinessStatus>(getRealTimeBusinessStatus());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,10 +37,19 @@ export default function App() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Update real-time business status every 10 seconds
+    const interval = setInterval(() => {
+      setBusinessStatus(getRealTimeBusinessStatus());
+    }, 10000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(interval);
+    };
   }, []);
 
-  const whatsappUrl = 'https://api.whatsapp.com/send?l=pt_BR&phone=551132589004';
+  const whatsappUrl = 'https://wa.me/5511938011790';
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -64,8 +75,8 @@ export default function App() {
           className="logo"
           id="header-logo"
         >
-          <span role="img" aria-label="dente" style={{ fontSize: '1.45rem' }}>🦷</span>
-          <span className="logo-text">Atual Odonto</span>
+          <LogoM size={36} color={isScrolled ? '#283719' : '#C8A858'} />
+          <span className="logo-text">Dra. Mayume Amorim</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -89,7 +100,7 @@ export default function App() {
             id="header-cta-btn"
           >
             <span>Agendar no WhatsApp</span>
-            <span className="dot-lime">↗</span>
+            <span className="dot-gold">↗</span>
           </motion.a>
 
           {/* Mobile Hamburger Toggle */}
@@ -149,9 +160,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section (3-Layered background with organic blob, droplets & floating card) */}
+      {/* Hero Section (3-Layered background with olive dark base, olive mid organic blob, gold droplets & floating cream card) */}
       <section className="hero" id="inicio">
-        {/* Camada 2: Mancha Pincelada Orgânica Escura (#3A8AF9) com leve flutuação suave */}
+        {/* Camada 2: Mancha Pincelada Orgânica Média com Borda Dourada (#4B552B) com suave flutuação */}
         <motion.div
           animate={{
             scale: [1, 1.02, 0.99, 1],
@@ -166,7 +177,7 @@ export default function App() {
           aria-hidden="true"
         />
 
-        {/* Camada 3: Gotas e Respingos Soltos com micro animação orgânica */}
+        {/* Camada 3: Gotas e Respingos Soltos Dourados (#C8A858) */}
         <motion.div
           animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
@@ -192,7 +203,7 @@ export default function App() {
           aria-hidden="true"
         />
 
-        {/* Camada 4: Cartão Flutuante Claro (#F0F9FE) com todo o conteúdo do Hero */}
+        {/* Camada 4: Cartão Creme Flutuante (#F5F0E7) com todo o conteúdo do Hero */}
         <motion.div
           initial={{ opacity: 0, y: 35, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -201,7 +212,7 @@ export default function App() {
           id="hero-main-card"
         >
           <div className="hero-copy" id="hero-copy">
-            {/* Rating Pill e Status em Tempo Real */}
+            {/* Rating Pill & Real-time Status */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -209,10 +220,9 @@ export default function App() {
               className="flex flex-wrap items-center gap-3 mb-5"
             >
               <div className="rating-pill mb-0" id="hero-rating-pill">
-                <span className="stars">★ 4.6</span>
-                <span className="reviews">(482 avaliações no Google)</span>
+                <span className="stars">★ 4.8</span>
+                <span className="reviews">(Avaliações no Google)</span>
               </div>
-              <RealtimeStatusBadge compact />
             </motion.div>
 
             {/* Headline com Tipografia Editorial e Entrada Fluida */}
@@ -232,10 +242,10 @@ export default function App() {
               className="hero-sub"
               id="hero-subtitle"
             >
-              Estética e saúde bucal no coração da República, São Paulo — tecnologia moderna, pontualidade e atendimento acolhedor.
+              Estética e saúde bucal em São Miguel Paulista / Vila Americana, São Paulo — atendimento acolhedor, pontual e dedicado.
             </motion.p>
 
-            {/* Call to Action Button */}
+            {/* Call to Action Button & Real-time schedule info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -255,7 +265,7 @@ export default function App() {
               </motion.a>
 
               <span className="hero-cta-note">
-                <span className="online-dot" /> Atendimento rápido via WhatsApp
+                <span className="online-dot" /> Atendimento via WhatsApp
               </span>
             </motion.div>
           </div>
@@ -279,7 +289,7 @@ export default function App() {
                 controls={false}
                 className="hero-video"
                 id="hero-video-player"
-                aria-label="Vídeo 3D de manutenção e polimento dental na Atual Odonto"
+                aria-label="Vídeo 3D de manutenção e polimento dental com a Dra. Mayume Amorim"
               />
 
               {/* Video subtle gloss reflection overlay */}
@@ -296,8 +306,8 @@ export default function App() {
               id="hero-stat-card"
             >
               <div className="stat-card-stars">★★★★★</div>
-              <strong>4.6</strong>
-              <span>nota média · 482 avaliações</span>
+              <strong>4.8</strong>
+              <span>nota média no Google</span>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -339,7 +349,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About Section with photo of Dra. Mayume Amorim */}
       <section className="about" id="sobre">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -349,15 +359,18 @@ export default function App() {
           className="about-photo-wrapper"
         >
           <img
-            src={aboutDentistImg}
-            alt="Profissional dentista com luvas azuis na Atual Odonto"
+            src={draMayumePortrait}
+            alt="Dra. Mayume Amorim - Dentista especializada em estética e saúde bucal"
             className="about-photo"
             id="about-photo-img"
             referrerPolicy="no-referrer"
           />
           <div className="about-badge">
-            <strong>10+</strong>
-            <span>Anos de dedicação ao seu sorriso</span>
+            <LogoM size={38} color="#C8A858" />
+            <div>
+              <strong className="block text-2xl font-serif text-[#C8A858] leading-tight">Dra. Mayume</strong>
+              <span>Excelência e acolhimento</span>
+            </div>
           </div>
         </motion.div>
 
@@ -369,14 +382,14 @@ export default function App() {
           className="about-copy"
           id="about-copy-box"
         >
-          <span className="eyebrow" style={{ textAlign: 'left' }}>SOBRE A CLÍNICA</span>
-          <h2>Perto de você, no centro de São Paulo</h2>
+          <span className="eyebrow" style={{ textAlign: 'left' }}>SOBRE A PROFISSIONAL</span>
+          <h2>Perto de você, em São Miguel Paulista</h2>
           <p>
-            Na <strong>Atual Odonto</strong>, unimos excelência técnica, tecnologias modernas e um
-            olhar humano e acolhedor para cuidar do seu sorriso. Localizada no coração da República, nossa clínica oferece tratamentos de estética e saúde bucal com conforto, pontualidade e dedicação exclusiva a cada paciente.
+            No consultório da <strong>Dra. Mayume Amorim</strong>, unimos excelência técnica, tecnologias modernas e um
+            olhar humano e acolhedor para cuidar do seu sorriso. Localizado na Vila Americana / São Miguel Paulista, oferecemos tratamentos de estética e saúde bucal com conforto, pontualidade e dedicação exclusiva a cada paciente.
           </p>
           <p>
-            Contamos com consultórios modernos, equipamentos de alta precisão e uma equipe especializada pronta para transformar o seu sorriso em um ambiente seguro e confortável.
+            Contamos com consultório equipado, procedimentos de alta precisão e atendimento odontológico especializado pronto para transformar o seu sorriso em um ambiente seguro e confortável.
           </p>
           <div className="about-action">
             <motion.a
@@ -387,7 +400,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="btn btn-primary"
             >
-              Conheça Nossa Equipe ↗
+              Agendar Consulta ↗
             </motion.a>
           </div>
         </motion.div>
@@ -404,19 +417,19 @@ export default function App() {
         >
           <div className="reviews-pill-header">
             <span className="eyebrow">AVALIAÇÕES GOOGLE</span>
-            <h2>Mais de 480 pacientes satisfeitos</h2>
+            <h2>Pacientes satisfeitos com o atendimento</h2>
             <div className="rating-summary-box">
-              <span className="big-rating">4.6</span>
+              <span className="big-rating">4.8</span>
               <div className="rating-stars-col">
                 <div className="stars-row">★★★★★</div>
-                <span className="rating-count">Com base em 482 avaliações reais no Google</span>
+                <span className="rating-count">Avaliações reais de pacientes no Google</span>
               </div>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Location / Contato Section (Única fonte de endereço, status e mapa) */}
+      {/* Location / Contato Section (Única fonte de endereço, status em tempo real e mapa) */}
       <section className="location" id="contato">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -425,7 +438,7 @@ export default function App() {
           transition={{ duration: 0.6 }}
         >
           <h2>Venha nos visitar</h2>
-          <p className="location-subtitle">Fácil acesso no centro histórico de São Paulo</p>
+          <p className="location-subtitle">Localização de fácil acesso na Zona Leste de São Paulo</p>
         </motion.div>
 
         <div className="location-grid">
@@ -437,21 +450,36 @@ export default function App() {
             className="location-card"
             id="location-details-card"
           >
-            <div className="location-header-row">
-              <span className="location-badge">📍 Localização Central</span>
+            <div className="location-header-row flex items-center justify-between">
+              <span className="location-badge">📍 Consultório Odontológico</span>
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${businessStatus.isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
+                <span className={`w-2 h-2 rounded-full ${businessStatus.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+                {businessStatus.statusText}
+              </span>
             </div>
-            <p className="address-text">R. Br. de Itapetininga, 221 - República, São Paulo - SP, 01042-001</p>
-            <p className="building-name">Condomínio Edifício La Royale</p>
+            <p className="address-text">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana, São Paulo–SP, 08010-290</p>
+            <p className="building-name">1º andar, sala 13 · Vila Americana / São Miguel Paulista</p>
             
-            <div className="location-status-row my-1">
-              <RealtimeStatusBadge />
+            <div className="location-status-row my-1 p-3 rounded-xl bg-stone-100/80 border border-stone-200/60">
+              <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8A858" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>{businessStatus.subText}</span>
+              </div>
+              <p className="text-xs text-stone-500 mt-1">Horário de funcionamento: Seg a Sex a partir das 07:35</p>
             </div>
 
-            <a href="tel:551132589004" id="location-phone-link" className="phone-link">
+            <p className="disclaimer text-xs text-stone-600 mt-2 leading-relaxed border-t border-stone-200 pt-2">
+              * O endereço pode aparecer como Vila Jacuí em alguns cadastros; o consultório informa Vila Americana / São Miguel Paulista. Confirme pelo WhatsApp antes de ir.
+            </p>
+
+            <a href="tel:5511938011790" id="location-phone-link" className="phone-link mt-2">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>(11) 3258-9004</span>
+              <span>(11) 93801-1790</span>
             </a>
 
             <div>
@@ -461,7 +489,7 @@ export default function App() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-lime w-full text-center"
+                className="btn btn-primary w-full text-center"
                 id="location-whatsapp-btn"
               >
                 Chamar no WhatsApp ↗
@@ -478,8 +506,8 @@ export default function App() {
             id="map-embed-container"
           >
             <iframe
-              title="Localização Atual Odonto no Google Maps"
-              src="https://maps.google.com/maps?q=R.%20Br.%20de%20Itapetininga,%20221%20-%20Rep%C3%BAblica,%20S%C3%A3o%20Paulo%20-%20SP,%2001042-001&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              title="Localização Dra. Mayume Amorim no Google Maps"
+              src="https://maps.google.com/maps?q=Dra%20Mayume%20Amorim%20Consult%C3%B3rio%20Odontol%C3%B3gico%20Rua%20Jos%C3%A9%20Otoni%20284%20S%C3%A3o%20Paulo&t=&z=16&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
@@ -490,8 +518,11 @@ export default function App() {
       {/* Site Footer */}
       <footer className="site-footer" id="site-footer">
         <div className="footer-content">
-          <p>© {new Date().getFullYear()} Atual Odonto — Estética & Saúde Bucal. Todos os direitos reservados.</p>
-          <p className="footer-sub">R. Br. de Itapetininga, 221 - República, São Paulo - SP</p>
+          <div className="flex justify-center mb-2">
+            <LogoM size={32} color="#C8A858" />
+          </div>
+          <p>© {new Date().getFullYear()} Dra. Mayume Amorim — Consultório Odontológico. Todos os direitos reservados.</p>
+          <p className="footer-sub">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana / São Miguel Paulista, São Paulo - SP</p>
         </div>
       </footer>
     </main>
