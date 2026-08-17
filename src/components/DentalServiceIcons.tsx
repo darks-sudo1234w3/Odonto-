@@ -14,7 +14,7 @@ export function IconLimpeza() {
       {/* Ultrasonic scaler tip / wand */}
       <path
         d="M34 10L42 4M38 14L44 8"
-        stroke="#C8A858"
+        stroke="#D7B66A"
         strokeWidth="2"
         strokeLinecap="round"
       />
@@ -25,15 +25,15 @@ export function IconLimpeza() {
         strokeWidth="2"
         strokeLinecap="round"
       />
-      <circle cx="14" cy="12" r="1.5" fill="#C8A858" />
-      <circle cx="36" cy="18" r="2" fill="#C8A858" />
+      <circle cx="14" cy="12" r="1.5" fill="#D7B66A" />
+      <circle cx="36" cy="18" r="2" fill="#D7B66A" />
       <path
         d="M24 16L25 18.5L27.5 19.5L25 20.5L24 23L23 20.5L20.5 19.5L23 18.5L24 16Z"
-        fill="#C8A858"
+        fill="#D7B66A"
       />
       <defs>
         <linearGradient id="limpeza-grad" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FAF7F2" />
+          <stop stopColor="#F5F0E7" />
           <stop offset="1" stopColor="#F5F0E7" />
         </linearGradient>
       </defs>
@@ -55,18 +55,18 @@ export function IconClareamento() {
       {/* Diamond Brilliance Starburst in center */}
       <path
         d="M24 12L26 18L32 20L26 22L24 28L22 22L16 20L22 18L24 12Z"
-        fill="#C8A858"
+        fill="#D7B66A"
         stroke="#4B552B"
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
       {/* Shining ray flashes */}
-      <line x1="24" y1="2" x2="24" y2="5" stroke="#C8A858" strokeWidth="2" strokeLinecap="round" />
-      <line x1="7" y1="9" x2="10" y2="11" stroke="#C8A858" strokeWidth="2" strokeLinecap="round" />
-      <line x1="41" y1="9" x2="38" y2="11" stroke="#C8A858" strokeWidth="2" strokeLinecap="round" />
+      <line x1="24" y1="2" x2="24" y2="5" stroke="#D7B66A" strokeWidth="2" strokeLinecap="round" />
+      <line x1="7" y1="9" x2="10" y2="11" stroke="#D7B66A" strokeWidth="2" strokeLinecap="round" />
+      <line x1="41" y1="9" x2="38" y2="11" stroke="#D7B66A" strokeWidth="2" strokeLinecap="round" />
       <defs>
         <linearGradient id="clareamento-grad" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFFFFF" />
+          <stop stopColor="#F5F0E7" />
           <stop offset="1" stopColor="#F5F0E7" />
         </linearGradient>
       </defs>
@@ -93,21 +93,21 @@ export function IconOrtodontia() {
         height="10"
         rx="2.5"
         fill="#4B552B"
-        stroke="#C8A858"
+        stroke="#D7B66A"
         strokeWidth="1.5"
       />
       {/* Orthodontic Archwire */}
       <path
         d="M8 22C16 22 32 22 40 22"
-        stroke="#C8A858"
+        stroke="#D7B66A"
         strokeWidth="2.4"
         strokeLinecap="round"
       />
       {/* Bracket Ligature / Elastomeric Dot */}
-      <circle cx="24" cy="22" r="2.2" fill="#dfc37a" />
+      <circle cx="24" cy="22" r="2.2" fill="#D7B66A" />
       <defs>
         <linearGradient id="orto-grad" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FAF7F2" />
+          <stop stopColor="#F5F0E7" />
           <stop offset="1" stopColor="#F5F0E7" />
         </linearGradient>
       </defs>
@@ -128,7 +128,7 @@ export function IconImplante() {
       {/* Titanium Abutment Collar */}
       <path
         d="M19 20H29L27 24H21L19 20Z"
-        fill="#C8A858"
+        fill="#D7B66A"
       />
       {/* Precision Titanium Screw Root with Threads */}
       <path
@@ -138,15 +138,15 @@ export function IconImplante() {
         strokeWidth="1.5"
       />
       {/* Thread Grooves */}
-      <line x1="19" y1="27" x2="29" y2="27" stroke="#C8A858" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="20" y1="31" x2="28" y2="31" stroke="#C8A858" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="21" y1="35" x2="27" y2="35" stroke="#C8A858" strokeWidth="1.8" strokeLinecap="round" />
-      <line x1="22" y1="39" x2="26" y2="39" stroke="#C8A858" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="19" y1="27" x2="29" y2="27" stroke="#D7B66A" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="20" y1="31" x2="28" y2="31" stroke="#D7B66A" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="21" y1="35" x2="27" y2="35" stroke="#D7B66A" strokeWidth="1.8" strokeLinecap="round" />
+      <line x1="22" y1="39" x2="26" y2="39" stroke="#D7B66A" strokeWidth="1.8" strokeLinecap="round" />
       {/* Glow dot */}
-      <circle cx="34" cy="7" r="1.5" fill="#C8A858" />
+      <circle cx="34" cy="7" r="1.5" fill="#D7B66A" />
       <defs>
         <linearGradient id="implante-crown-grad" x1="24" y1="4" x2="24" y2="21" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFFFFF" />
+          <stop stopColor="#F5F0E7" />
           <stop offset="1" stopColor="#F5F0E7" />
         </linearGradient>
       </defs>
@@ -168,19 +168,19 @@ export function IconEstetica() {
       {/* Porcelain Veneer / Aesthetic Smile Arc */}
       <path
         d="M15 22C18 26 30 26 33 22"
-        stroke="#C8A858"
+        stroke="#D7B66A"
         strokeWidth="2.6"
         strokeLinecap="round"
       />
       {/* Aesthetic Starburst highlight */}
       <path
         d="M33 11L34.5 14L37.5 15.5L34.5 17L33 20L31.5 17L28.5 15.5L31.5 14L33 11Z"
-        fill="#C8A858"
+        fill="#D7B66A"
       />
       <circle cx="16" cy="14" r="2" fill="#4B552B" opacity="0.6" />
       <defs>
         <linearGradient id="estetica-grad" x1="24" y1="6" x2="24" y2="42" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFFFFF" />
+          <stop stopColor="#F5F0E7" />
           <stop offset="1" stopColor="#F5F0E7" />
         </linearGradient>
       </defs>
