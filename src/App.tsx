@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import heroToothVideo from './assets/videos/hero_tooth_video.mp4';
 import heroToothImg from './assets/images/hero_tooth_render_1786930380496.jpg';
-import draMayumePortrait from './assets/images/dra_mayume_portrait_1786942310156.jpg';
+import draMayumePortrait from './assets/images/dra-mayume-professional.png';
 import LogoM from './components/LogoM.tsx';
+import NavigationDock from './components/NavigationDock.tsx';
+import SmileGallery from './components/SmileGallery.tsx';
 import { getRealTimeBusinessStatus, BusinessStatus } from './utils/businessHours.ts';
 import {
   IconLimpeza,
@@ -23,7 +25,6 @@ const servicesData = [
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [businessStatus, setBusinessStatus] = useState<BusinessStatus>(getRealTimeBusinessStatus());
 
   useEffect(() => {
@@ -53,7 +54,6 @@ export default function App() {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
     const element = document.querySelector(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -79,86 +79,9 @@ export default function App() {
           <span className="logo-text">Dra. Mayume Amorim</span>
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="site-nav" id="main-nav">
-          <a href="#inicio" onClick={(e) => scrollToSection(e, '#inicio')}>Início</a>
-          <a href="#sobre" onClick={(e) => scrollToSection(e, '#sobre')}>Sobre</a>
-          <a href="#servicos" onClick={(e) => scrollToSection(e, '#servicos')}>Serviços</a>
-          <a href="#avaliacoes" onClick={(e) => scrollToSection(e, '#avaliacoes')}>Avaliações</a>
-          <a href="#contato" onClick={(e) => scrollToSection(e, '#contato')}>Contato</a>
-        </nav>
-
-        {/* Action Button Desktop */}
-        <div className="header-actions">
-          <motion.a
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.96 }}
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-pill header-cta-desktop"
-            id="header-cta-btn"
-          >
-            <span>Agendar no WhatsApp</span>
-            <span className="dot-gold">↗</span>
-          </motion.a>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            type="button"
-            className="mobile-menu-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menu de navegação"
-            id="mobile-menu-btn"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              {mobileMenuOpen ? (
-                <>
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </>
-              ) : (
-                <>
-                  <line x1="4" y1="7" x2="20" y2="7" />
-                  <line x1="4" y1="12" x2="20" y2="12" />
-                  <line x1="4" y1="17" x2="20" y2="17" />
-                </>
-              )}
-            </svg>
-          </button>
-        </div>
       </motion.header>
 
-      {/* Mobile Drawer Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="mobile-nav-drawer"
-            id="mobile-nav-drawer"
-          >
-            <nav className="mobile-nav-links">
-              <a href="#inicio" onClick={(e) => scrollToSection(e, '#inicio')}>Início</a>
-              <a href="#sobre" onClick={(e) => scrollToSection(e, '#sobre')}>Sobre</a>
-              <a href="#servicos" onClick={(e) => scrollToSection(e, '#servicos')}>Serviços</a>
-              <a href="#avaliacoes" onClick={(e) => scrollToSection(e, '#avaliacoes')}>Avaliações</a>
-              <a href="#contato" onClick={(e) => scrollToSection(e, '#contato')}>Contato</a>
-            </nav>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary w-full text-center"
-              style={{ marginTop: '16px' }}
-            >
-              Agendar no WhatsApp ↗
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <NavigationDock />
 
       {/* Hero Section (3-Layered background with olive dark base, olive mid organic blob, gold droplets & floating cream card) */}
       <section className="hero" id="inicio">
@@ -313,8 +236,8 @@ export default function App() {
         </motion.div>
       </section>
 
-      {/* Services Section */}
-      <section className="services" id="servicos">
+      {/* Treatments Section */}
+      <section className="services" id="tratamentos">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -322,7 +245,7 @@ export default function App() {
           transition={{ duration: 0.6 }}
           className="services-header"
         >
-          <span className="eyebrow">SERVIÇOS</span>
+          <span className="eyebrow">TRATAMENTOS</span>
           <h2>Atendimento completo para o seu sorriso</h2>
           <p className="services-sub">Procedimentos modernos realizados com precisão, conforto e estética natural</p>
         </motion.div>
@@ -348,6 +271,8 @@ export default function App() {
           ))}
         </div>
       </section>
+
+      <SmileGallery />
 
       {/* About Section with photo of Dra. Mayume Amorim */}
       <section className="about" id="sobre">

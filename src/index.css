@@ -72,111 +72,105 @@ h1, h2, h3, .eyebrow, .font-heading {
   transform: scale(1.02);
 }
 
-.site-nav {
+/* Dock flutuante — única navegação principal */
+.dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  z-index: 50;
   display: flex;
-  align-items: center;
-  gap: 30px;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(200, 168, 88, 0.28);
+  border-radius: 24px;
+  background: rgba(245, 240, 231, 0.78);
+  box-shadow: 0 20px 50px rgba(20, 20, 10, 0.25);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  animation: dockFloat 8s ease-in-out infinite;
 }
 
-.site-nav a {
-  color: var(--olive-dark);
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 600;
+@keyframes dockFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-2px); }
+}
+
+.dock-item-btn {
   position: relative;
-  padding: 6px 0;
-  transition: color 200ms ease;
-}
-
-.site-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background-color: var(--gold);
-  transition: width 200ms ease;
-  border-radius: 99px;
-}
-
-.site-nav a:hover {
-  color: var(--gold);
-}
-
-.site-nav a:hover::after {
-  width: 100%;
-}
-
-.site-header.scrolled .site-nav a {
-  color: var(--ink);
-}
-
-.site-header.scrolled .site-nav a:hover {
-  color: var(--gold);
-}
-
-.header-actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.mobile-menu-toggle {
-  display: none;
-  background: rgba(75, 85, 43, 0.12);
-  border: 1px solid rgba(200, 168, 88, 0.35);
-  color: var(--olive-dark);
-  border-radius: 12px;
   width: 44px;
   height: 44px;
+  flex: 0 0 44px;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.site-header.scrolled .mobile-menu-toggle {
-  background: var(--cream);
-  border-color: rgba(200, 168, 88, 0.4);
-}
-
-/* Mobile Nav Drawer */
-.mobile-nav-drawer {
-  position: fixed;
-  top: 76px;
-  left: 16px;
-  right: 16px;
-  background: var(--cream);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-  border: 1px solid var(--gold);
-  z-index: 49;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.mobile-nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.mobile-nav-links a {
-  color: var(--ink);
-  font-size: 1.05rem;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  transition: background 150ms ease;
-}
-
-.mobile-nav-links a:hover {
-  background: rgba(200, 168, 88, 0.15);
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
   color: var(--olive-dark);
+  text-decoration: none;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1), background 300ms, box-shadow 300ms;
+}
+
+.dock-item-btn:hover,
+.dock-item-btn:focus-visible {
+  transform: scale(1.16);
+  box-shadow: 0 10px 24px rgba(200, 168, 88, 0.25);
+  outline: none;
+}
+
+.glow-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(200, 168, 88, 0.45);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.dock-item-btn:hover .glow-ring,
+.dock-item-btn:focus-visible .glow-ring { opacity: 1; }
+
+.dock-item-icon { width: 22px; height: 22px; }
+.dock-item-btn.is-active .dock-item-icon { color: var(--gold); }
+
+.dock-active-dot {
+  position: absolute;
+  bottom: -7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+}
+
+.dock-item-btn.is-active .dock-active-dot { opacity: 1; }
+
+.dock-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--olive-dark);
+  color: var(--cream);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 150ms;
+}
+
+.dock-item-btn:hover .dock-tooltip,
+.dock-item-btn:focus-visible .dock-tooltip { opacity: 1; }
+
+.dock-item-whatsapp {
+  background: var(--gold);
+  color: var(--olive-dark);
+  box-shadow: 0 8px 20px rgba(200, 168, 88, 0.34);
 }
 
 /* Buttons */
@@ -592,6 +586,138 @@ h1, h2, h3, .eyebrow, .font-heading {
 }
 
 /* =========================================================================
+   SMILES FAN GALLERY
+   ========================================================================= */
+.gallery {
+  overflow: hidden;
+  padding: 84px 6vw 78px;
+  background: #fbf9f5;
+  text-align: center;
+  border-top: 1px solid rgba(200, 168, 88, 0.25);
+}
+
+.gallery-heading {
+  max-width: 680px;
+  margin: 0 auto 34px;
+}
+
+.gallery-heading h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+}
+
+.gallery-heading p {
+  margin: 0;
+  color: var(--olive-mid);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.fan-carousel { max-width: 920px; margin: 0 auto; }
+
+.fan-stage {
+  position: relative;
+  height: 410px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.fan-card {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(200, 168, 88, 0.3);
+  border-radius: 20px;
+  background: var(--cream);
+  box-shadow: var(--card-shadow);
+  transform-origin: 50% 100%;
+  cursor: pointer;
+}
+
+.fan-card.is-center { z-index: 10; }
+.fan-card:hover { z-index: 20; }
+
+.fan-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.fan-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.fan-arrow {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(37, 37, 37, 0.1);
+  border-radius: 999px;
+  outline: none;
+  background: rgba(37, 37, 37, 0.05);
+  color: rgba(37, 37, 37, 0.42);
+  box-shadow: 0 4px 20px rgba(20, 20, 10, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: border-color 300ms, color 300ms, box-shadow 300ms;
+}
+
+.fan-arrow::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(37, 37, 37, 0.05);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.fan-arrow:hover,
+.fan-arrow:focus-visible {
+  border-color: rgba(200, 168, 88, 0.62);
+  color: var(--olive-dark);
+  box-shadow: 0 7px 24px rgba(200, 168, 88, 0.2);
+}
+
+.fan-arrow:active { opacity: 0.7; }
+.fan-arrow svg { width: 20px; height: 20px; stroke-width: 2.5; }
+
+.fan-dots { display: flex; align-items: center; gap: 9px; }
+
+.fan-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(37, 37, 37, 0.15);
+  cursor: pointer;
+  transition: transform 200ms, background 200ms;
+}
+
+.fan-dot.is-active {
+  background: var(--olive-dark);
+  transform: scale(1.3);
+}
+
+/* =========================================================================
    ABOUT SECTION
    ========================================================================= */
 .about {
@@ -860,15 +986,20 @@ h1, h2, h3, .eyebrow, .font-heading {
    MOBILE RESPONSIVENESS (<900px & <640px)
    ========================================================================= */
 @media (max-width: 900px) {
-  .site-nav {
-    display: none;
+  .dock {
+    bottom: 16px;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 20px;
   }
-  .header-cta-desktop {
-    display: none;
+  .dock-item-btn {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    border-radius: 14px;
   }
-  .mobile-menu-toggle {
-    display: inline-flex;
-  }
+  .dock-item-icon { width: 20px; height: 20px; }
+  .site-header { padding-inline: 4vw; }
   .hero {
     padding: 96px 4vw 48px;
   }
@@ -940,7 +1071,33 @@ h1, h2, h3, .eyebrow, .font-heading {
   }
 }
 
+@media (max-width: 640px) {
+  .dock {
+    width: calc(100vw - 24px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    gap: 2px;
+    padding: 9px 10px;
+  }
+  .dock-item-btn {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+  .dock-tooltip { display: none; }
+  .gallery { padding: 60px 12px 64px; }
+  .gallery-heading { margin-bottom: 24px; }
+  .fan-stage { height: 300px; padding-top: 10px; }
+  .fan-card { width: 170px; border-radius: 16px; }
+  .fan-controls { gap: 16px; margin-top: 10px; }
+  .fan-arrow { width: 44px; height: 44px; }
+  .fan-arrow svg { width: 16px; height: 16px; }
+  .fan-dots { gap: 7px; }
+}
+
 @media (max-width: 480px) {
+  .site-header .logo { gap: 8px; font-size: 1.08rem; }
+  .site-header .logo svg { width: 32px; height: 32px; }
   .hero {
     padding: 86px 12px 36px;
   }
