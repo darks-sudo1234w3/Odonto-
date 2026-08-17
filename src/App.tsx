@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import heroToothVideo from './assets/videos/hero_tooth_video.mp4';
 import heroToothImg from './assets/images/hero_tooth_render_1786930380496.jpg';
-import draMayumePortrait from './assets/images/dra_mayume_portrait_1786942310156.jpg';
+import draMayumePortrait from './assets/images/dra-mayume-professional.png';
 import LogoM from './components/LogoM.tsx';
-import { getRealTimeBusinessStatus, BusinessStatus } from './utils/businessHours.ts';
 import {
   IconLimpeza,
   IconClareamento,
@@ -24,7 +23,6 @@ const servicesData = [
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [businessStatus, setBusinessStatus] = useState<BusinessStatus>(getRealTimeBusinessStatus());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,14 +36,8 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Update real-time business status every 10 seconds
-    const interval = setInterval(() => {
-      setBusinessStatus(getRealTimeBusinessStatus());
-    }, 10000);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
     };
   }, []);
 
@@ -75,7 +67,7 @@ export default function App() {
           className="logo"
           id="header-logo"
         >
-          <LogoM size={36} color={isScrolled ? '#283719' : '#C8A858'} />
+          <LogoM size={46} color="#4B552B" />
           <span className="logo-text">Dra. Mayume Amorim</span>
         </a>
 
@@ -366,7 +358,7 @@ export default function App() {
             referrerPolicy="no-referrer"
           />
           <div className="about-badge">
-            <LogoM size={38} color="#C8A858" />
+            <LogoM size={38} color="#4B552B" />
             <div>
               <strong className="block text-2xl font-serif text-[#C8A858] leading-tight">Dra. Mayume</strong>
               <span>Excelência e acolhimento</span>
@@ -451,11 +443,8 @@ export default function App() {
             id="location-details-card"
           >
             <div className="location-header-row flex items-center justify-between">
-              <span className="location-badge">📍 Consultório Odontológico</span>
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${businessStatus.isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
-                <span className={`w-2 h-2 rounded-full ${businessStatus.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-                {businessStatus.statusText}
-              </span>
+              <span className="location-badge">Consultório Odontológico</span>
+              <span className="appointment-only-badge">Atendimento agendado</span>
             </div>
             <p className="address-text">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana, São Paulo–SP, 08010-290</p>
             <p className="building-name">1º andar, sala 13 · Vila Americana / São Miguel Paulista</p>
@@ -466,9 +455,8 @@ export default function App() {
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-                <span>{businessStatus.subText}</span>
+                <span>Horário apenas com consulta agendada</span>
               </div>
-              <p className="text-xs text-stone-500 mt-1">Horário de funcionamento: Seg a Sex a partir das 07:35</p>
             </div>
 
             <p className="disclaimer text-xs text-stone-600 mt-2 leading-relaxed border-t border-stone-200 pt-2">
@@ -519,7 +507,7 @@ export default function App() {
       <footer className="site-footer" id="site-footer">
         <div className="footer-content">
           <div className="flex justify-center mb-2">
-            <LogoM size={32} color="#C8A858" />
+            <LogoM size={32} color="#4B552B" />
           </div>
           <p>© {new Date().getFullYear()} Dra. Mayume Amorim — Consultório Odontológico. Todos os direitos reservados.</p>
           <p className="footer-sub">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana / São Miguel Paulista, São Paulo - SP</p>
