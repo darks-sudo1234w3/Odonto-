@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import heroToothVideo from './assets/videos/hero_tooth_video.mp4';
 import heroToothImg from './assets/images/hero_tooth_render_1786930380496.jpg';
-import draMayumePortrait from './assets/images/dra_mayume_portrait_1786942310156.jpg';
+import draMayumePortrait from './assets/images/dra_mayume_professional.png';
 import LogoM from './components/LogoM.tsx';
-import { getRealTimeBusinessStatus, BusinessStatus } from './utils/businessHours.ts';
 import {
   IconLimpeza,
   IconClareamento,
@@ -24,7 +23,6 @@ const servicesData = [
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [businessStatus, setBusinessStatus] = useState<BusinessStatus>(getRealTimeBusinessStatus());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,14 +36,8 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // Update real-time business status every 10 seconds
-    const interval = setInterval(() => {
-      setBusinessStatus(getRealTimeBusinessStatus());
-    }, 10000);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
     };
   }, []);
 
@@ -220,8 +212,8 @@ export default function App() {
               className="flex flex-wrap items-center gap-3 mb-5"
             >
               <div className="rating-pill mb-0" id="hero-rating-pill">
-                <span className="stars">★ 4.8</span>
-                <span className="reviews">(Avaliações no Google)</span>
+                <span className="stars">★ 4,8 de 5</span>
+                <span className="reviews">(4 avaliações no Google · DentMap)</span>
               </div>
             </motion.div>
 
@@ -242,7 +234,7 @@ export default function App() {
               className="hero-sub"
               id="hero-subtitle"
             >
-              Estética e saúde bucal em São Miguel Paulista / Vila Americana, São Paulo — atendimento acolhedor, pontual e dedicado.
+              Ortodontia, canal, periodontia, prótese, clareamento e implantes — atendimento odontológico completo em São Paulo.
             </motion.p>
 
             {/* Call to Action Button & Real-time schedule info */}
@@ -306,8 +298,8 @@ export default function App() {
               id="hero-stat-card"
             >
               <div className="stat-card-stars">★★★★★</div>
-              <strong>4.8</strong>
-              <span>nota média no Google</span>
+              <strong>4,8</strong>
+              <span>nota média · 4 avaliações no Google</span>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -383,13 +375,10 @@ export default function App() {
           id="about-copy-box"
         >
           <span className="eyebrow" style={{ textAlign: 'left' }}>SOBRE A PROFISSIONAL</span>
-          <h2>Perto de você, em São Miguel Paulista</h2>
+          <h2>Dra. Mayume Amorim</h2>
+          <p><strong>CROSP 154358 · Odontologia pela USP</strong></p>
           <p>
-            No consultório da <strong>Dra. Mayume Amorim</strong>, unimos excelência técnica, tecnologias modernas e um
-            olhar humano e acolhedor para cuidar do seu sorriso. Localizado na Vila Americana / São Miguel Paulista, oferecemos tratamentos de estética e saúde bucal com conforto, pontualidade e dedicação exclusiva a cada paciente.
-          </p>
-          <p>
-            Contamos com consultório equipado, procedimentos de alta precisão e atendimento odontológico especializado pronto para transformar o seu sorriso em um ambiente seguro e confortável.
+            Atendimentos: ortodontia, canal, periodontia, restauração, odontopediatria, prótese, clareamento, extração e implantes.
           </p>
           <div className="about-action">
             <motion.a
@@ -419,10 +408,10 @@ export default function App() {
             <span className="eyebrow">AVALIAÇÕES GOOGLE</span>
             <h2>Pacientes satisfeitos com o atendimento</h2>
             <div className="rating-summary-box">
-              <span className="big-rating">4.8</span>
+              <span className="big-rating">4,8</span>
               <div className="rating-stars-col">
                 <div className="stars-row">★★★★★</div>
-                <span className="rating-count">Avaliações reais de pacientes no Google</span>
+                <span className="rating-count">4 avaliações no Google · DentMap</span>
               </div>
             </div>
           </div>
@@ -451,28 +440,23 @@ export default function App() {
             id="location-details-card"
           >
             <div className="location-header-row flex items-center justify-between">
-              <span className="location-badge">📍 Consultório Odontológico</span>
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${businessStatus.isOpen ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}>
-                <span className={`w-2 h-2 rounded-full ${businessStatus.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-                {businessStatus.statusText}
-              </span>
+              <span className="location-badge">Consultório Odontológico</span>
             </div>
-            <p className="address-text">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana, São Paulo–SP, 08010-290</p>
-            <p className="building-name">1º andar, sala 13 · Vila Americana / São Miguel Paulista</p>
-            
+            <p className="address-text">Rua José Otoni, 284, 1º andar, sala 13, Vila Americana, São Paulo–SP, CEP 08010-290</p>
+            <p className="building-name">Região: São Miguel Paulista / Vila Jacuí</p>
+
             <div className="location-status-row my-1 p-3 rounded-xl bg-stone-100/80 border border-stone-200/60">
               <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8A858" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-                <span>{businessStatus.subText}</span>
+                <span>Horário sob consulta — confirme pelo WhatsApp</span>
               </div>
-              <p className="text-xs text-stone-500 mt-1">Horário de funcionamento: Seg a Sex a partir das 07:35</p>
             </div>
 
             <p className="disclaimer text-xs text-stone-600 mt-2 leading-relaxed border-t border-stone-200 pt-2">
-              * O endereço pode aparecer como Vila Jacuí em alguns cadastros; o consultório informa Vila Americana / São Miguel Paulista. Confirme pelo WhatsApp antes de ir.
+              O endereço pode aparecer como Vila Jacuí em alguns cadastros; o consultório informa Vila Americana / São Miguel Paulista. Confirme pelo WhatsApp antes de ir.
             </p>
 
             <a href="tel:5511938011790" id="location-phone-link" className="phone-link mt-2">
@@ -481,6 +465,12 @@ export default function App() {
               </svg>
               <span>(11) 93801-1790</span>
             </a>
+
+            <div className="flex flex-wrap gap-4">
+              <a href="https://www.instagram.com/dra.mayume.dentista/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/61555995413002/" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Dra+Mayume+Amorim+Consult%C3%B3rio+Odontol%C3%B3gico+Rua+Jos%C3%A9+Otoni+284+S%C3%A3o+Paulo" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a>
+            </div>
 
             <div>
               <motion.a
@@ -507,7 +497,7 @@ export default function App() {
           >
             <iframe
               title="Localização Dra. Mayume Amorim no Google Maps"
-              src="https://maps.google.com/maps?q=Dra%20Mayume%20Amorim%20Consult%C3%B3rio%20Odontol%C3%B3gico%20Rua%20Jos%C3%A9%20Otoni%20284%20S%C3%A3o%20Paulo&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=Dra%20Mayume%20Amorim%20Consult%C3%B3rio%20Odontol%C3%B3gico%20Rua%20Jos%C3%A9%20Otoni%20284%201%C2%BA%20andar%20sala%2013%20Vila%20Americana%20S%C3%A3o%20Paulo%20SP%2008010-290&t=&z=16&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
@@ -522,7 +512,6 @@ export default function App() {
             <LogoM size={32} color="#C8A858" />
           </div>
           <p>© {new Date().getFullYear()} Dra. Mayume Amorim — Consultório Odontológico. Todos os direitos reservados.</p>
-          <p className="footer-sub">Rua José Otoni, 284, 1º andar, sala 13 - Vila Americana / São Miguel Paulista, São Paulo - SP</p>
         </div>
       </footer>
     </main>
