@@ -62,10 +62,23 @@ h1, h2, h3, .eyebrow, .font-heading {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--olive-dark);
+  color: var(--cream);
   text-decoration: none;
   font-family: 'Fraunces', Georgia, serif;
   transition: transform 200ms ease;
+}
+
+.site-header .logo img {
+  filter: brightness(1.7);
+  transition: filter 200ms ease;
+}
+
+.site-header.scrolled .logo {
+  color: var(--olive-dark);
+}
+
+.site-header.scrolled .logo img {
+  filter: none;
 }
 
 .site-header .logo:hover {

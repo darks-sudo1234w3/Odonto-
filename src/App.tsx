@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import heroToothVideo from './assets/videos/hero_tooth_video.mp4';
 import heroToothImg from './assets/images/hero_tooth_render_1786930380496.jpg';
-import draMayumePortrait from './assets/images/dra_mayume_portrait_1786942310156.jpg';
+import draMayumePortrait from './assets/images/dra_mayume_professional.png';
 import LogoM from './components/LogoM.tsx';
 import { getRealTimeBusinessStatus, BusinessStatus } from './utils/businessHours.ts';
 import {
